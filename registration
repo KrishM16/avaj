@@ -1,0 +1,79 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class RegistrationForm extends JFrame implements ActionListener {
+    // Components
+    private JTextField firstNameField, lastNameField, emailField;
+    private JPasswordField passwordField;
+    private JButton registerButton;
+
+    public RegistrationForm() {
+        // Set frame properties
+        setTitle("Registration Form");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridLayout(5, 2));
+
+        // Create components
+        JLabel firstNameLabel = new JLabel("First Name:");
+        firstNameField = new JTextField();
+
+        JLabel lastNameLabel = new JLabel("Last Name:");
+        lastNameField = new JTextField();
+
+        JLabel emailLabel = new JLabel("Email:");
+        emailField = new JTextField();
+
+        JLabel passwordLabel = new JLabel("Password:");
+        passwordField = new JPasswordField();
+
+        registerButton = new JButton("Register");
+        registerButton.addActionListener(this);
+
+        // Add components to the frame
+        add(firstNameLabel);
+        add(firstNameField);
+        add(lastNameLabel);
+        add(lastNameField);
+        add(emailLabel);
+        add(emailField);
+        add(passwordLabel);
+        add(passwordField);
+        add(new JLabel()); // Empty label for spacing
+        add(registerButton);
+
+        // Set frame visibility
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == registerButton) {
+            // Retrieve user input
+            String firstName = firstNameField.getText();
+            String lastName = lastNameField.getText();
+            String email = emailField.getText();
+            char[] passwordChars = passwordField.getPassword();
+            String password = new String(passwordChars);
+
+            // Perform registration logic (you can modify this part based on your needs)
+            // For demonstration, we will just display the entered information
+            String message = "Registration Successful!\n\n"
+                    + "First Name: " + firstName + "\n"
+                    + "Last Name: " + lastName + "\n"
+                    + "Email: " + email;
+            JOptionPane.showMessageDialog(this, message);
+
+            // Clear fields after registration
+            firstNameField.setText("");
+            lastNameField.setText("");
+            emailField.setText("");
+            passwordField.setText("");
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new RegistrationForm());
+    }
+}
